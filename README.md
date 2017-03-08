@@ -1,6 +1,6 @@
 # RRotonda
 
-Restaurante rotonda
+Rotonda de restaurantes
 
 Consorcio Comidas a Domicilio, CCD, en el cual varias empresas
 de comidas rápidas conciben un negocio de una rotonda de comidas basada en internet. Su mercado objetivo
