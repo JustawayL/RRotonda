@@ -11,7 +11,7 @@ class Restaurante
      */
     public function __construct()
     {
-        $this->bd_info= array("servername" => "localhost", "username" => "Justaway", "password" => "mysql1221", "BD" => "rotonda");
+        $this->bd_info= array("servername" => "localhost", "username" => "user", "password" => "pass", "BD" => "rotonda");
     }
     /**
      * @var void
