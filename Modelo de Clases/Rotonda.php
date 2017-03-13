@@ -27,7 +27,7 @@ class Rotonda
     /**
      *
      */
-    public function registrarRestaurante():void
+    public function registrarRestaurante()
     {
         // TODO: implement here
     }
@@ -35,7 +35,7 @@ class Rotonda
     /**
      *
      */
-    public function realizarPedido():void
+    public function realizarPedido()    
     {
         // TODO: implement here
     }

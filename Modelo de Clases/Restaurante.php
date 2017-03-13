@@ -11,8 +11,8 @@ class Restaurante
      */
     public function __construct()
     {
+        $this->bd_info= array("servername" => "localhost", "username" => "Justaway", "password" => "mysql1221", "BD" => "rotonda");
     }
-
     /**
      * @var void
      */
@@ -33,33 +33,43 @@ class Restaurante
      */
     public $descripcion;
 
-
-
-
-
-
-
-
-
-
-
+    public $bd_info;
 
 
     /**
      *
      */
-    public function registrarProducto($producto):void
+
+    public function registrarProducto($producto)
     {
         // TODO: implement here
-        $mysqli = new mysqli("server", "user", "password", "BD");
+        
+
+        $mysqli = new mysqli($this->bd_info["servername"], $this->bd_info["username"], $this->bd_info["password"], $this->bd_info["BD"]);
         if ($mysqli->connect_errno) {
             echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
         }
 
         echo $mysqli->host_info . "\n";
 
-        $sql = "INSERT INTO clientes (id, nombre, contrasena)
-        VALUES ( '3' , 'Jhon', '111' )";
+        $consec;
+        $result=0;
+
+        $sql = "SELECT id FROM productos";
+
+        $result = $mysqli->query($sql);
+
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $consec = $row["id"];
+                }
+            }
+
+        $consec+=1;
+        
+        $sql = "INSERT INTO productos (id, nombre, categoria, precio, foto, descripcion, restaurante, existencias)
+        VALUES ( '$consec' , '$producto->nombre', '$producto->categoria', '$producto->precio', '$producto->foto' ,'$producto->descripcion', '$producto->restaurante','$producto->existencias')";
 
 
         if ($mysqli->query($sql) === TRUE) {
@@ -67,7 +77,7 @@ class Restaurante
         } else {
             echo "Error: " . $sql . "<br>" . $mysqli->error;
         }
-
+        
 
         $mysqli->close();
 
@@ -76,7 +86,56 @@ class Restaurante
     /**
      *
      */
-    public function registrarMenu():void
+    public function registrarMenu()
+    {
+        // TODO: implement here
+
+    }
+
+    /**
+     *
+     */
+    public function registrarIngrediente($ingrediente)
+    {
+        // TODO: implement here
+        $mysqli = new mysqli($this->bd_info["servername"], $this->bd_info["username"], $this->bd_info["password"],$this->bd_info["BD"]);
+        if ($mysqli->connect_errno) {
+            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+        }
+
+        $consec=0;
+
+        $sql = "SELECT id FROM ingredientes";
+
+        $result = $mysqli->query($sql);
+
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $consec = $row["id"];
+                }
+            }
+
+        $consec+=1;
+        
+        $sql = "INSERT INTO ingredientes (id, nombre, restaurante, existencias)
+        VALUES ( '$consec' , '$ingrediente->nombre', '$ingrediente->restaurante','$ingrediente->existencias')";
+
+
+        if ($mysqli->query($sql) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $mysqli->error;
+        }
+        
+
+        $mysqli->close();
+    }
+
+    /**
+     *
+     */
+    public function consultarProductos()
     {
         // TODO: implement here
     }
@@ -84,7 +143,7 @@ class Restaurante
     /**
      *
      */
-    public function registrarIngrediente():void
+    public function consultarMenus()
     {
         // TODO: implement here
     }
@@ -92,7 +151,7 @@ class Restaurante
     /**
      *
      */
-    public function consultarProductos():void
+    public function consultarIngredientes()
     {
         // TODO: implement here
     }
@@ -100,23 +159,7 @@ class Restaurante
     /**
      *
      */
-    public function consultarMenus():void
-    {
-        // TODO: implement here
-    }
-
-    /**
-     *
-     */
-    public function consultarIngredientes():void
-    {
-        // TODO: implement here
-    }
-
-    /**
-     *
-     */
-    public function consultarIngredientesPersonalizables():void
+    public function consultarIngredientesPersonalizables()
     {
         // TODO: implement here
     }

@@ -42,17 +42,14 @@ class Producto
      * @var void
      */
     public $alternativas;
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * @var void
+     */
+    public $existencias;
+    /**
+     * @var void
+     */
+    public $restaurante;
 
 
 
@@ -62,7 +59,7 @@ class Producto
     /**
      * @param void $Ingrediente
      */
-    public function cambiarIngrediente($Ingrediente):void
+    public function cambiarIngrediente($Ingrediente)q 
     {
         // TODO: implement here
     }

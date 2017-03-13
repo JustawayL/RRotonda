@@ -30,7 +30,7 @@ class Pedido
     /**
      *
      */
-    public function calcularPrecio():void
+    public function calcularPrecio()
     {
         // TODO: implement here
     }

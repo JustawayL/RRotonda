@@ -17,6 +17,14 @@ class Ingrediente
      * @var void
      */
     public $nombre;
+    /**
+     * @var void
+     */
+    public $restaurante;
+    /**
+     * @var void
+     */
+    public $existencias;
 
     /**
      * @var void

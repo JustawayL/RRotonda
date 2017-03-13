@@ -36,7 +36,7 @@ class Menu
     /**
      *
      */
-    public function cambiarProducto():void
+    public function cambiarProducto()
     {
         // TODO: implement here
     }

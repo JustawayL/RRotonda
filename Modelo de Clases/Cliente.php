@@ -33,7 +33,7 @@ class Cliente
     /**
      *
      */
-    public function realizarPedido():void
+    public function realizarPedido()
     {
         // TODO: implement here
     }
