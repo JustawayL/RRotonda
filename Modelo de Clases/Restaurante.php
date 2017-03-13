@@ -48,9 +48,29 @@ class Restaurante
     /**
      *
      */
-    public function registrarProducto():void
+    public function registrarProducto($producto):void
     {
         // TODO: implement here
+        $mysqli = new mysqli("server", "user", "password", "BD");
+        if ($mysqli->connect_errno) {
+            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+        }
+
+        echo $mysqli->host_info . "\n";
+
+        $sql = "INSERT INTO clientes (id, nombre, contrasena)
+        VALUES ( '3' , 'Jhon', '111' )";
+
+
+        if ($mysqli->query($sql) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $mysqli->error;
+        }
+
+
+        $mysqli->close();
+
     }
 
     /**
