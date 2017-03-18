@@ -1,6 +1,6 @@
 <?php
-require_once 'Menu.php';
-require_once 'CRUD_Menu.php';
+require_once 'modelo\Menu.php';
+require_once 'modelo\CRUD_Menu.php';
 
 // Logica
 $alm = new Menu();
