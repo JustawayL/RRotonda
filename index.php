@@ -1,10 +1,10 @@
 <?php
-require_once 'Ingrediente.php';
-require_once 'CRUD_Ingrediente.php';
+require_once 'Menu.php';
+require_once 'CRUD_Menu.php';
 
 // Logica
-$alm = new Ingrediente();
-$model = new CRUD_Ingrediente();
+$alm = new Menu();
+$model = new CRUD_Menu();
 
 if(isset($_REQUEST['action']))
 {
@@ -13,8 +13,8 @@ if(isset($_REQUEST['action']))
 		case 'actualizar':
 			$alm->__SET('id',              $_REQUEST['id']);
 			$alm->__SET('nombre',          $_REQUEST['nombre']);
+			$alm->__SET('precio',          $_REQUEST['precio']);
 			$alm->__SET('restaurante',     $_REQUEST['restaurante']);
-			$alm->__SET('existencias',     $_REQUEST['existencias']);
 
 			$model->Actualizar($alm);
 			header('Location: index.php');
@@ -22,8 +22,8 @@ if(isset($_REQUEST['action']))
 
 		case 'registrar':
             $alm->__SET('nombre',          $_REQUEST['nombre']);
+            $alm->__SET('precio',          $_REQUEST['precio']);
             $alm->__SET('restaurante',     $_REQUEST['restaurante']);
-            $alm->__SET('existencias',     $_REQUEST['existencias']);
 
 			$model->Registrar($alm);
 			header('Location: index.php');
@@ -66,12 +66,12 @@ if(isset($_REQUEST['action']))
                             <td><input type="text" name="nombre" value="<?php echo $alm->__GET('nombre'); ?>" style="width:100%;" /></td>
                         </tr>
                         <tr>
-                            <th style="text-align:left;">Restaurante</th>
-                            <td><input type="text" name="restaurante" value="<?php echo $alm->__GET('restaurante'); ?>" style="width:100%;" /></td>
+                            <th style="text-align:left;">Precio</th>
+                            <td><input type="text" name="precio" value="<?php echo $alm->__GET('precio'); ?>" style="width:100%;" /></td>
                         </tr>
                         <tr>
-                            <th style="text-align:left;">Existencias</th>
-                            <td><input type="text" name="existencias" value="<?php echo $alm->__GET('existencias'); ?>" style="width:100%;" /></td>
+                            <th style="text-align:left;">Restaurante</th>
+                            <td><input type="text" name="restaurante" value="<?php echo $alm->__GET('restaurante'); ?>" style="width:100%;" /></td>
                         </tr>
                         <tr>
                             <td colspan="2">
@@ -86,8 +86,8 @@ if(isset($_REQUEST['action']))
                         <tr>
                             <th style="text-align:left;">id</th>
                             <th style="text-align:left;">nombre</th>
+                            <th style="text-align:left;">precio</th>
                             <th style="text-align:left;">restaurante</th>
-                            <th style="text-align:left;">existencias</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -96,8 +96,8 @@ if(isset($_REQUEST['action']))
                         <tr>
                             <td><?php echo $r->__GET('id'); ?></td>
                             <td><?php echo $r->__GET('nombre'); ?></td>
+                            <td><?php echo $r->__GET('precio'); ?></td>
                             <td><?php echo $r->__GET('restaurante'); ?></td>
-                            <td><?php echo $r->__GET('existencias'); ?></td>
                             <td>
                                 <a href="?action=editar&id=<?php echo $r->id; ?>">Editar</a>
                             </td>
