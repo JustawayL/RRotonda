@@ -8,9 +8,10 @@ Todos los derechos reservados
     Author     : Jeisson Piñeros
 */
 header{
-    background-color: #204d74;
+    background-color: #f0ad4e;
 }
 header .titulo{
+    text-transform: uppercase;
     text-shadow: 0px 0px 7px rgba(0, 0, 0, 0.75);
     color: white;
     font-size: 30px;
@@ -23,39 +24,22 @@ header .subtitulo{
 body{
     background-image: url("../imagenes/fondo.jpg");
 }
-h1{
-    text-transform: uppercase;
-    text-shadow: 0px 0px 7px rgba(0, 0, 0, 0.75);
-    color: #0080ff;
+table tbody tr td{
+    text-align: left;
 }
 .centrado{
     text-align: center;
 }
-.tablainfo{
-    text-align: left;
-}
-.tablainfo tr td{
-    padding: 5px;
-}
 .jpanel{
     border: 3px solid #204d74;
-    background-color: rgba(116,172,181,0.5);
+    background-color: rgba(240, 173, 78, 0.5);
     border-radius: 10px;
     padding: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.buscar{
-    padding-bottom: 30px;
-}
-.tabla thead tr th{
-    text-align: center;
-}
-.tabla tbody tr td{
-    text-align: left;
-}
-.izquierda{
-    text-align: left;
+.imgFlotante{
+    float:left;
 }
 footer{
     margin-top: 5px;

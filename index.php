@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<?php include 'parametros.php' ?>
+<?php
+	$_SESSION["titulo"] = "Tus Tacos";
+	$_SESSION["subtitulo"] = "La mejor comida tradicional Mexicana";
+	$_SESSION["version"] = "1.0";
+	$_SESSION["usuario"] = null;
+?>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title><?php echo $_SESSION["titulo"]." ".$_SESSION["version"] ?></title>
+		<title><?php echo $_SESSION["titulo"] ?></title>
+		<link rel="icon" href="imagenes/favicon.png" type="image/png" sizes="16x16">
 		<!-- Librerias -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -20,7 +26,7 @@
 		<div  class="container">
 			<div class="row">
 				<section class="jpanel col-md-9">
-					Hola!!
+					<?php include 'paneles/menus.php' ?>
 				</section>
 				<aside class="jpanel col-md-3">
 					<?php
