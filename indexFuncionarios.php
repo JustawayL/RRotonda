@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <?php
 	$_SESSION["titulo"] = "Tus Tacos";
-	$_SESSION["subtitulo"] = "La mejor comida tradicional Mexicana";
+	$_SESSION["subtitulo"] = "Portal Funcionarios";
 	$_SESSION["version"] = "1.0";
 	$_SESSION["usuario"] = null;
 ?>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title><?php echo $_SESSION["titulo"] ?></title>
+		<title>Funcionarios, <?php echo $_SESSION["titulo"]?></title>
 		<link rel="icon" href="imagenes/favicon.png" type="image/png" sizes="16x16">
 		<!-- Librerias -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
