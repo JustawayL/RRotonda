@@ -1,7 +1,6 @@
 <?php
 class Restaurante
 {
-    private $id;
     private $nombre;
     private $direccion;
     private $telefono;

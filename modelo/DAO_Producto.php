@@ -1,5 +1,5 @@
 <?php
-class CRUD_Producto
+class DAO_Producto
 {
 	private $pdo;
 
@@ -125,7 +125,7 @@ class CRUD_Producto
 
 	public function Registrar(Producto $data)
 	{
-		$consec;
+		$consec=0;
 		try 
 		{
 		$sql_aux= "SELECT id FROM productos";

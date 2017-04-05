@@ -1,5 +1,5 @@
 <?php
-class CRUD_Ingrediente
+class DAO_Cliente
 {
 	private $pdo;
 
@@ -22,19 +22,18 @@ class CRUD_Ingrediente
 		{
 			$result = array();
 
-			$stm = $this->pdo->prepare("SELECT * FROM ingredientes");
+			$stm = $this->pdo->prepare("SELECT * FROM clientes");
 			$stm->execute();
 
 			foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
 			{
-				$ingr = new Ingrediente();
+				$cli = new Cliente();
 
-				$ingr->__SET('id', $r->id);
-				$ingr->__SET('nombre', $r->nombre);
-				$ingr->__SET('restaurante', $r->restaurante);
-				$ingr->__SET('existencias', $r->existencias);
-
-				$result[] = $ingr;
+				$cli->__SET('id', $r->id);
+				$cli->__SET('nombre', $r->nombre);
+				$cli->__SET('clave', $r->clave);
+				
+				$result[] = $cli;
 			}
 
 			return $result;
@@ -50,20 +49,19 @@ class CRUD_Ingrediente
 		try 
 		{
 			$stm = $this->pdo
-			          ->prepare("SELECT * FROM ingredientes WHERE id = ?");
+			          ->prepare("SELECT * FROM clientes WHERE id = ?");
 			          
 
 			$stm->execute(array($id));
 			$r = $stm->fetch(PDO::FETCH_OBJ);
 
-			$ingr = new Ingrediente();
+			$cli = new Cliente();
 
-			$ingr->__SET('id', $r->id);
-			$ingr->__SET('nombre', $r->nombre);
-			$ingr->__SET('restaurante', $r->restaurante);
-			$ingr->__SET('existencias', $r->existencias);
+			$cli->__SET('id', $r->id);
+			$cli->__SET('nombre', $r->nombre);
+			$cli->__SET('clave', $r->clave);
 
-			return $ingr;
+			return $cli;
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -75,7 +73,7 @@ class CRUD_Ingrediente
 		try 
 		{
 			$stm = $this->pdo
-			          ->prepare("DELETE FROM ingredientes WHERE id = ?");			          
+			          ->prepare("DELETE FROM clientes WHERE id = ?");			          
 
 			$stm->execute(array($id));
 		} catch (Exception $e) 
@@ -84,22 +82,20 @@ class CRUD_Ingrediente
 		}
 	}
 
-	public function Actualizar(Ingrediente $data)
+	public function Actualizar(Cliente $data)
 	{
 		try 
 		{
-			$sql = "UPDATE ingredientes SET 
+			$sql = "UPDATE clientes SET 
 						nombre          = ?, 
-						restaurante     = ?,
-						existencias     = ?
+						clave 		    = ?
 				    WHERE id = ?";
 
 			$this->pdo->prepare($sql)
 			     ->execute(
 				array(
 					$data->__GET('nombre'), 
-					$data->__GET('restaurante'), 
-					$data->__GET('existencias'),
+					$data->__GET('clave'), 
 					$data->__GET('id')
 					)
 				);
@@ -109,12 +105,12 @@ class CRUD_Ingrediente
 		}
 	}
 
-	public function Registrar(Ingrediente $data)
+	public function Registrar(Cliente $data)
 	{
-		$consec;
+		$consec=0;
 		try 
 		{
-		$sql_aux= "SELECT id FROM ingredientes";
+		$sql_aux= "SELECT id FROM clientes";
 		$stmt=$this->pdo->prepare($sql_aux);
 		$stmt->execute();
 		$result = $stmt->fetchAll();
@@ -123,15 +119,14 @@ class CRUD_Ingrediente
         	$consec = $row["id"];
     	}
     	$consec+=1;
-		$sql = "INSERT INTO ingredientes (id,nombre,restaurante,existencias) 
-		        VALUES ($consec, ?, ?, ?)";
+		$sql = "INSERT INTO clientes (id,nombre,clave) 
+		        VALUES ($consec, ?, ?)";
 
 		$this->pdo->prepare($sql)
 		     ->execute(
 			array(
 				$data->__GET('nombre'), 
-				$data->__GET('restaurante'), 
-				$data->__GET('existencias'),
+				$data->__GET('clave')
 				)
 			);
 		} catch (Exception $e) 

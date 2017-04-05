@@ -1,5 +1,5 @@
 <?php
-class CRUD_Menu
+class DAO_Ingrediente
 {
 	private $pdo;
 
@@ -22,19 +22,19 @@ class CRUD_Menu
 		{
 			$result = array();
 
-			$stm = $this->pdo->prepare("SELECT * FROM menus");
+			$stm = $this->pdo->prepare("SELECT * FROM ingredientes");
 			$stm->execute();
 
 			foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
 			{
-				$menu = new Menu();
+				$ingr = new Ingrediente();
 
-				$menu->__SET('id', $r->id);
-				$menu->__SET('nombre', $r->nombre);
-				$menu->__SET('precio', $r->precio);
-				$menu->__SET('restaurante', $r->restaurante);
+				$ingr->__SET('id', $r->id);
+				$ingr->__SET('nombre', $r->nombre);
+				$ingr->__SET('restaurante', $r->restaurante);
+				$ingr->__SET('existencias', $r->existencias);
 
-				$result[] = $menu;
+				$result[] = $ingr;
 			}
 
 			return $result;
@@ -50,21 +50,20 @@ class CRUD_Menu
 		try 
 		{
 			$stm = $this->pdo
-			          ->prepare("SELECT * FROM menus WHERE id = ?");
+			          ->prepare("SELECT * FROM ingredientes WHERE id = ?");
 			          
 
 			$stm->execute(array($id));
 			$r = $stm->fetch(PDO::FETCH_OBJ);
 
-			$menu = new Menu();
+			$ingr = new Ingrediente();
 
-			$menu->__SET('id', $r->id);
-			$menu->__SET('nombre', $r->nombre);
-			$menu->__SET('precio', $r->precio);
-			$menu->__SET('restaurante', $r->restaurante);
-			
+			$ingr->__SET('id', $r->id);
+			$ingr->__SET('nombre', $r->nombre);
+			$ingr->__SET('restaurante', $r->restaurante);
+			$ingr->__SET('existencias', $r->existencias);
 
-			return $menu;
+			return $ingr;
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -76,7 +75,7 @@ class CRUD_Menu
 		try 
 		{
 			$stm = $this->pdo
-			          ->prepare("DELETE FROM menus WHERE id = ?");			          
+			          ->prepare("DELETE FROM ingredientes WHERE id = ?");			          
 
 			$stm->execute(array($id));
 		} catch (Exception $e) 
@@ -85,22 +84,22 @@ class CRUD_Menu
 		}
 	}
 
-	public function Actualizar(Menu $data)
+	public function Actualizar(Ingrediente $data)
 	{
 		try 
 		{
-			$sql = "UPDATE menus SET 
+			$sql = "UPDATE ingredientes SET 
 						nombre          = ?, 
-						precio     		= ?,
-						restaurante     = ?
+						restaurante     = ?,
+						existencias     = ?
 				    WHERE id = ?";
 
 			$this->pdo->prepare($sql)
 			     ->execute(
 				array(
 					$data->__GET('nombre'), 
-					$data->__GET('precio'), 
-					$data->__GET('restaurante'),
+					$data->__GET('restaurante'), 
+					$data->__GET('existencias'),
 					$data->__GET('id')
 					)
 				);
@@ -110,12 +109,12 @@ class CRUD_Menu
 		}
 	}
 
-	public function Registrar(Menu $data)
+	public function Registrar(Ingrediente $data)
 	{
-		$consec;
+		$consec=0;
 		try 
 		{
-		$sql_aux= "SELECT id FROM menus";
+		$sql_aux= "SELECT id FROM ingredientes";
 		$stmt=$this->pdo->prepare($sql_aux);
 		$stmt->execute();
 		$result = $stmt->fetchAll();
@@ -124,15 +123,15 @@ class CRUD_Menu
         	$consec = $row["id"];
     	}
     	$consec+=1;
-		$sql = "INSERT INTO menus (id,nombre,precio,restaurante) 
+		$sql = "INSERT INTO ingredientes (id,nombre,restaurante,existencias) 
 		        VALUES ($consec, ?, ?, ?)";
 
 		$this->pdo->prepare($sql)
 		     ->execute(
 			array(
 				$data->__GET('nombre'), 
-				$data->__GET('precio'), 
-				$data->__GET('restaurante'),
+				$data->__GET('restaurante'), 
+				$data->__GET('existencias'),
 				)
 			);
 		} catch (Exception $e) 
