@@ -157,4 +157,52 @@ class DAO_Producto
 			die($e->getMessage());
 		}
 	}
+	public function registrarAlternativa($prod , $alt)
+	{
+		try 
+		{
+
+		$sql = "INSERT INTO alternativas_productos (producto,alternativa) 
+		        VALUES (?, ?)";
+
+		$this->pdo->prepare($sql)
+		     ->execute(array($prod,$alt));
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+
+	//Retorna una lista de ingredientes que son alternativas de un ingrediente
+	public function listarAlternativas($id)
+	{
+		try
+		{
+			$result = array();
+
+			$stm = $this->pdo->prepare("SELECT * FROM productos b, alternativas_productos c WHERE c.producto=? AND b.id=c.alternativa");
+			$stm->execute(array($id));
+
+			foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
+			{
+				$prod = new Producto();
+
+				$prod->__SET('id', $r->id);
+				$prod->__SET('nombre', $r->nombre);
+				$prod->__SET('categoria', $r->categoria);
+				$prod->__SET('precio', $r->precio);
+				$prod->__SET('foto', $r->foto);
+				$prod->__SET('descripcion', $r->descripcion);
+				$prod->__SET('restaurante', $r->restaurante);
+				$prod->__SET('existencias', $r->existencias);
+				$result[] = $prod;
+			}
+
+			return $result;
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
 }

@@ -109,6 +109,22 @@ class DAO_Ingrediente
 		}
 	}
 
+	public function registrarAlternativa($ing , $alt)
+	{
+		try 
+		{
+
+		$sql = "INSERT INTO alternativas_ingredientes (ingrediente,alternativa) 
+		        VALUES (?, ?)";
+
+		$this->pdo->prepare($sql)
+		     ->execute(array($ing,$alt));
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+
 	public function Registrar(Ingrediente $data)
 	{
 		$consec=0;
@@ -135,6 +151,37 @@ class DAO_Ingrediente
 				)
 			);
 		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+
+
+	//Retorna una lista de ingredientes que son alternativas de un ingrediente
+	public function listarAlternativas($id)
+	{
+		try
+		{
+			$result = array();
+
+			$stm = $this->pdo->prepare("SELECT * FROM ingredientes b, alternativas_ingredientes c WHERE c.ingrediente=? AND b.id=c.alternativa");
+			$stm->execute(array($id));
+
+			foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
+			{
+				$ingr = new Ingrediente();
+
+				$ingr->__SET('id', $r->id);
+				$ingr->__SET('nombre', $r->nombre);
+				$ingr->__SET('restaurante', $r->restaurante);
+				$ingr->__SET('existencias', $r->existencias);
+
+				$result[] = $ingr;
+			}
+
+			return $result;
+		}
+		catch(Exception $e)
 		{
 			die($e->getMessage());
 		}
