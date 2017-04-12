@@ -1,9 +1,10 @@
 <h1>Lista de Menús</h1>
 <?php
 require_once 'php/modelo/Menu.php';
+require_once 'php/dao/DaoPdo.php';
 require_once 'php/dao/DaoMenu.php';
 $alm = new Menu();
-$model = new DAO_Menu();
+$model = new DaoMenu('mysql:host=localhost;dbname=rotonda', 'root', '');
 ?>                    
 
 <!-- Se debe realizar un for en php para mostrar todos los menús -->
@@ -18,7 +19,7 @@ $model = new DAO_Menu();
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach($model->Listar() as $r): ?>
+			<?php foreach($model->getMenus() as $r): ?>
 				<tr>
 					<td><?php echo $r->__GET('nombre') ?></td>
 					<td>$<?php echo $r->__GET('precio') ?></td>
