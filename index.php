@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-	include 'modelo/Cliente.php';
+	include 'php/modelo/Cliente.php';
 	$_SESSION["titulo"] = "Tus Tacos";
 	$_SESSION["subtitulo"] = "La mejor comida tradicional Mexicana";
 	$_SESSION["version"] = "1.0";

@@ -1,9 +1,9 @@
 <h1>Lista de Menús</h1>
 <?php
-require_once 'modelo\Menu.php';
-require_once 'modelo\CRUD_Menu.php';
+require_once 'php/modelo/Menu.php';
+require_once 'php/dao/DaoMenu.php';
 $alm = new Menu();
-$model = new CRUD_Menu();
+$model = new DAO_Menu();
 ?>                    
 
 <!-- Se debe realizar un for en php para mostrar todos los menús -->
