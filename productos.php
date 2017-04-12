@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <?php
-	include 'modelo/Cliente.php';
+	include 'modelo/Cliente.php';;
 	$_SESSION["titulo"] = "Tus Tacos";
 	$_SESSION["subtitulo"] = "La mejor comida tradicional Mexicana";
 	$_SESSION["version"] = "1.0";
-	$_SESSION["usuario"] = null;
+	$c = new Cliente();
+	$c->nombre = "Jeisson";
+	$_SESSION["usuario"] = $c;
 ?>
 <html>
 	<head>
@@ -27,7 +29,7 @@
 		<div  class="container">
 			<div class="row">
 				<section class="jpanel col-md-9">
-					<?php include 'paneles/menus.php' ?>
+					<?php include 'paneles/productos.php' ?>
 				</section>
 				<aside class="jpanel col-md-3">
 					<?php

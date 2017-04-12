@@ -25,18 +25,9 @@
 		</nav>-->
 		<div  class="container">
 			<div class="row">
-				<section class="jpanel col-md-9">
-					<?php include 'paneles/menus.php' ?>
+				<section class="jpanel col-md-4 col-md-offset-4">
+					<?php include 'paneles/loginFuncionario.php' ?>
 				</section>
-				<aside class="jpanel col-md-3">
-					<?php
-						if($_SESSION["usuario"]===null){
-							include 'paneles/loginCliente.php';
-						}else{
-							include 'paneles/menuCliente.php';
-						}
-					?>
-				</aside>
 			</div>
 		</div>
 		<footer  class="container">
