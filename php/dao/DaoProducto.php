@@ -29,7 +29,6 @@ class DaoProducto extends DaoPdo
         		$prod->__SET('precio', $r->precio);
         		$prod->__SET('foto', $r->foto);
         		$prod->__SET('descripcion', $r->descripcion);
-        		$prod->__SET('restaurante', $r->restaurante);
         		$prod->__SET('existencias', $r->existencias);
         		$result[] = $prod;
         	}
@@ -65,7 +64,6 @@ class DaoProducto extends DaoPdo
         	$prod->__SET('precio', $r->precio);
         	$prod->__SET('foto', $r->foto);
         	$prod->__SET('descripcion', $r->descripcion);
-        	$prod->__SET('restaurante', $r->restaurante);
         	$prod->__SET('existencias', $r->existencias);
         	return $prod;
         } catch (Exception $e) 
@@ -106,7 +104,6 @@ class DaoProducto extends DaoPdo
         				precio     		= ?,
         				foto          	= ?, 
         				descripcion     = ?,
-        				restaurante     = ?,
         				existencias     = ?
         		    WHERE id = ?";
 
@@ -118,7 +115,6 @@ class DaoProducto extends DaoPdo
         			$data->__GET('precio'),
         			$data->__GET('foto'),
         			$data->__GET('descripcion'),
-        			$data->__GET('restaurante'),
         			$data->__GET('existencias'),
         			$data->__GET('id')
         			)
@@ -135,20 +131,9 @@ class DaoProducto extends DaoPdo
      */
     public function crear($data)
     {
-        $consec=0;
-        try 
-        {
-        $sql_aux= "SELECT id FROM productos";
-        $stmt=$this->pdo->prepare($sql_aux);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-        foreach($result as $row) { 
-           	echo $row["id"];
-           	$consec = $row["id"];
-        }
-        $consec+=1;
-        $sql = "INSERT INTO productos (id,nombre,categoria,precio,foto,descripcion, restaurante,existencias) 
-                VALUES ($consec, ?, ?, ?,?,?,?)";
+        try{
+        $sql = "INSERT INTO productos (nombre,categoria,precio,foto,descripcion,existencias) 
+                VALUES (?, ?, ?, ?, ?)";
 
         $this->pdo->prepare($sql)
              ->execute(
@@ -158,7 +143,6 @@ class DaoProducto extends DaoPdo
         			$data->__GET('precio'),
         			$data->__GET('foto'),
         			$data->__GET('descripcion'),
-        			$data->__GET('restaurante'),
         			$data->__GET('existencias')
         		)
         	);
@@ -212,7 +196,6 @@ class DaoProducto extends DaoPdo
         		$prod->__SET('precio', $r->precio);
         		$prod->__SET('foto', $r->foto);
         		$prod->__SET('descripcion', $r->descripcion);
-        		$prod->__SET('restaurante', $r->restaurante);
         		$prod->__SET('existencias', $r->existencias);
         		$result[] = $prod;
         	}
@@ -224,15 +207,6 @@ class DaoProducto extends DaoPdo
         	die($e->getMessage());
         }
     }
-
-    /**
-     * @param string $restaurante
-     */
-    public function getProductosPorRestaurante($restaurante)
-    {
-        // TODO: implement here
-    }
-
     /**
      * @param string $categoria
      */

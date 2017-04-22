@@ -117,20 +117,10 @@ class DaoCliente extends DaoPdo
      */
     public function crear($data)
     {
-        $consec=0;
         try 
         {
-        $sql_aux= "SELECT id FROM clientes";
-        $stmt=$this->pdo->prepare($sql_aux);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-        foreach($result as $row) { 
-           	echo $row["id"];
-           	$consec = $row["id"];
-        }
-        $consec+=1;
-        $sql = "INSERT INTO clientes (id,nombre,clave) 
-                VALUES ($consec, ?, ?)";
+        $sql = "INSERT INTO clientes (nombre,clave) 
+                VALUES (?, ?)";
 
         $this->pdo->prepare($sql)
              ->execute(

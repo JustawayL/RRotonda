@@ -26,7 +26,6 @@ class DaoMenu extends DaoPdo
         		$menu->__SET('id', $r->id);
         		$menu->__SET('nombre', $r->nombre);
         		$menu->__SET('precio', $r->precio);
-        		$menu->__SET('restaurante', $r->restaurante);
 
         		$result[] = $menu;
         	}
@@ -59,7 +58,6 @@ class DaoMenu extends DaoPdo
         	$menu->__SET('id', $r->id);
         	$menu->__SET('nombre', $r->nombre);
         	$menu->__SET('precio', $r->precio);
-        	$menu->__SET('restaurante', $r->restaurante);
         			
 
         	return $menu;
@@ -97,8 +95,7 @@ class DaoMenu extends DaoPdo
         {
         	$sql = "UPDATE menus SET 
         				nombre          = ?, 
-        				precio     		= ?,
-        				restaurante     = ?
+        				precio     		= ?
         		    WHERE id = ?";
 
         	$this->pdo->prepare($sql)
@@ -106,7 +103,6 @@ class DaoMenu extends DaoPdo
         		array(
         			$data->__GET('nombre'), 
         			$data->__GET('precio'), 
-        			$data->__GET('restaurante'),
         			$data->__GET('id')
         			)
         		);
@@ -122,27 +118,15 @@ class DaoMenu extends DaoPdo
      */
     public function crear($data)
     {
-        $consec=0;
-        try 
-        {
-        $sql_aux= "SELECT id FROM menus";
-        $stmt=$this->pdo->prepare($sql_aux);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-        foreach($result as $row) { 
-           	echo $row["id"];
-           	$consec = $row["id"];
-        }
-        $consec+=1;
-        $sql = "INSERT INTO menus (id,nombre,precio,restaurante) 
-                VALUES ($consec, ?, ?, ?)";
+        try{
+        $sql = "INSERT INTO menus (nombre,precio) 
+                VALUES (?, ?)";
 
         $this->pdo->prepare($sql)
              ->execute(
         	array(
         		$data->__GET('nombre'), 
         		$data->__GET('precio'), 
-        		$data->__GET('restaurante'),
         		)
         	);
         } catch (Exception $e) 
@@ -159,11 +143,4 @@ class DaoMenu extends DaoPdo
         // TODO: implement here
     }
 
-    /**
-     * @param string $restaurante
-     */
-    public function getMenusPorRestaurante($restaurante)
-    {
-        // TODO: implement here
-    }
 }

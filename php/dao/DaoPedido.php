@@ -26,7 +26,6 @@ class DaoPedido extends DaoPdo
         		$ped->__SET('id', $r->id);
         		$ped->__SET('estado', $r->estado);
         		$ped->__SET('cliente', $r->cliente);
-        		$ped->__SET('restaurante', $r->restaurante);
         		$ped->__SET('fecha', $r->fecha);
 
         		$result[] = $ped;
@@ -60,7 +59,6 @@ class DaoPedido extends DaoPdo
         	$ped->__SET('id', $r->id);
         	$ped->__SET('estado', $r->estado);
         	$ped->__SET('cliente', $r->cliente);
-        	$ped->__SET('restaurante', $r->restaurante);
         	$ped->__SET('fecha', $r->fecha);
 
         	return $ped;
@@ -99,7 +97,6 @@ class DaoPedido extends DaoPdo
         	$sql = "UPDATE pedidos SET 
         				estado          = ?, 
         				cliente     	= ?,
-        				restaurante     = ?,
         		    	fecha     		= ?
         		    	WHERE id = ?";
 
@@ -108,7 +105,6 @@ class DaoPedido extends DaoPdo
         		array(
         			$data->__GET('estado'), 
         			$data->__GET('cliente'), 
-        			$data->__GET('restaurante'),
         			$data->__GET('fecha')
         			$data->__GET('id')
         			)
@@ -125,27 +121,15 @@ class DaoPedido extends DaoPdo
      */
     public function crear($data)
     {
-        $consec=0;
-        try 
-        {
-        $sql_aux= "SELECT id FROM pedidos";
-        $stmt=$this->pdo->prepare($sql_aux);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-        foreach($result as $row) { 
-           	echo $row["id"];
-           	$consec = $row["id"];
-        }
-        $consec+=1;
-        $sql = "INSERT INTO pedidos (id,estado,cliente,restaurante,fecha) 
-                VALUES ($consec, ?, ?, ?, ?)";
+        try{
+        $sql = "INSERT INTO pedidos (estado,cliente,fecha) 
+                VALUES (?, ?, ?)";
 
         $this->pdo->prepare($sql)
              ->execute(
         	array(
         		$data->__GET('estado'), 
         		$data->__GET('cliente'), 
-        		$data->__GET('restaurante'),
         		$data->__GET('fecha'),
         		)
         	);

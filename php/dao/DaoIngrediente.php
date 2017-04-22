@@ -25,7 +25,6 @@ class DaoIngrediente extends DaoPdo
 
         		$ingr->__SET('id', $r->id);
         		$ingr->__SET('nombre', $r->nombre);
-        		$ingr->__SET('restaurante', $r->restaurante);
         		$ingr->__SET('existencias', $r->existencias);
 
         		$result[] = $ingr;
@@ -58,7 +57,6 @@ class DaoIngrediente extends DaoPdo
 
         	$ingr->__SET('id', $r->id);
         	$ingr->__SET('nombre', $r->nombre);
-        	$ingr->__SET('restaurante', $r->restaurante);
         	$ingr->__SET('existencias', $r->existencias);
 
         	return $ingr;
@@ -96,15 +94,13 @@ class DaoIngrediente extends DaoPdo
         {
         	$sql = "UPDATE ingredientes SET 
         				nombre          = ?, 
-        				restaurante     = ?,
         				existencias     = ?
         		    WHERE id = ?";
 
         	$this->pdo->prepare($sql)
         	     ->execute(
         		array(
-        			$data->__GET('nombre'), 
-        			$data->__GET('restaurante'), 
+        			$data->__GET('nombre'),  
         			$data->__GET('existencias'),
         			$data->__GET('id')
         			)
@@ -142,26 +138,14 @@ class DaoIngrediente extends DaoPdo
      */
     public function crear($data)
     {
-        $consec=0;
-        try 
-        {
-        $sql_aux= "SELECT id FROM ingredientes";
-        $stmt=$this->pdo->prepare($sql_aux);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-        foreach($result as $row) { 
-           	echo $row["id"];
-           	$consec = $row["id"];
-        }
-        $consec+=1;
-        $sql = "INSERT INTO ingredientes (id,nombre,restaurante,existencias) 
-                VALUES ($consec, ?, ?, ?)";
+        try{
+        $sql = "INSERT INTO ingredientes (nombre,existencias) 
+                VALUES (?, ?)";
 
         $this->pdo->prepare($sql)
              ->execute(
         	array(
         		$data->__GET('nombre'), 
-        		$data->__GET('restaurante'), 
         		$data->__GET('existencias'),
         		)
         	);
@@ -190,7 +174,6 @@ class DaoIngrediente extends DaoPdo
 
         		$ingr->__SET('id', $r->id);
         		$ingr->__SET('nombre', $r->nombre);
-        		$ingr->__SET('restaurante', $r->restaurante);
         		$ingr->__SET('existencias', $r->existencias);
 
         		$result[] = $ingr;
@@ -202,14 +185,6 @@ class DaoIngrediente extends DaoPdo
         {
         	die($e->getMessage());
         }
-    }
-
-    /**
-     * @param string $restaurante
-     */
-    public function getIngredientesPorRestaurantes($restaurante)
-    {
-        // TODO: implement here
     }
 
     /**
