@@ -8,7 +8,6 @@ class Producto
     private $precio;
     private $foto;
     private $descripcion;
-    private $restaurante;
     private $existencias;
 
     public function __GET($k){ return $this->$k; }

@@ -3,7 +3,6 @@ class Ingrediente
 {
     private $id;
     private $nombre;
-    private $restaurante;
     private $existencias;
     private $lista_Ingredientes;
 

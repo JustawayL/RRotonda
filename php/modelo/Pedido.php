@@ -4,7 +4,6 @@ class Pedido
     private $id;
     private $estado;
     private $cliente;
-    private $restaurante;
     private $fecha;
 
     public function __GET($k){ return $this->$k; }
