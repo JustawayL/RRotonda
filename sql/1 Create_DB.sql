@@ -22,20 +22,11 @@ CREATE TABLE rrotonda.estados (
     PRIMARY KEY (tipo)
 );
 
-CREATE TABLE rrotonda.restaurantes (
-    nombre varchar(90) NOT NULL,
-    direccion varchar(100),
-    telefono bigint,
-    descripcion varchar(150),
-    PRIMARY KEY (nombre)
-);
-
 CREATE TABLE rrotonda.menus (
     id integer NOT NULL AUTO_INCREMENT,
     precio integer NOT NULL,
     nombre varchar(90) NOT NULL,
     personalizado boolean NOT NULL,
-    restaurante varchar(90) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -53,7 +44,6 @@ CREATE TABLE rrotonda.productos (
     foto varchar(200),
     descripcion varchar(150),
     personalizado boolean NOT NULL,
-    restaurante varchar(90) NOT NULL,
     existencias integer NOT NULL,
     PRIMARY KEY (id)
 );
@@ -72,7 +62,6 @@ CREATE TABLE rrotonda.alternativas_productos (
 CREATE TABLE rrotonda.ingredientes (
     id integer NOT NULL AUTO_INCREMENT,
     nombre varchar(90) NOT NULL,
-    restaurante varchar(90) NOT NULL,
     existencias integer NOT NULL,
     PRIMARY KEY (id)
 );
@@ -128,11 +117,6 @@ CREATE INDEX IN_pedidos__estado ON rrotonda.pedidos
 CREATE INDEX IN_pedidos__cliente ON rrotonda.pedidos
     (cliente);
 
-ALTER TABLE rrotonda.menus
-    ADD CONSTRAINT FK_menus__restaurante FOREIGN KEY (restaurante) REFERENCES rrotonda.restaurantes(nombre);
-CREATE INDEX IN_menus__restaurante ON rrotonda.menus
-    (restaurante);
-
 ALTER TABLE rrotonda.pedidos_menus
     ADD CONSTRAINT FK_pedidos_menus__pedido FOREIGN KEY (pedido) REFERENCES rrotonda.pedidos(id);
 ALTER TABLE rrotonda.pedidos_menus
@@ -140,23 +124,13 @@ ALTER TABLE rrotonda.pedidos_menus
 
 ALTER TABLE rrotonda.productos
     ADD CONSTRAINT FK_productos__categoria FOREIGN KEY (categoria) REFERENCES rrotonda.categorias_productos(nombre);
-ALTER TABLE rrotonda.productos
-    ADD CONSTRAINT FK_productos__restaurante FOREIGN KEY (restaurante) REFERENCES rrotonda.restaurantes(nombre);
 CREATE INDEX IN_productos__categoria ON rrotonda.productos
     (categoria);
-CREATE INDEX IN_productos__restaurante ON rrotonda.productos
-    (restaurante);
 
 ALTER TABLE rrotonda.alternativas_productos
     ADD CONSTRAINT FK_alternativas_productos__producto FOREIGN KEY (producto) REFERENCES rrotonda.productos(id);
 ALTER TABLE rrotonda.alternativas_productos
     ADD CONSTRAINT FK_alternativas_productos__alternativa FOREIGN KEY (alternativa) REFERENCES rrotonda.productos(id);
-
-ALTER TABLE rrotonda.ingredientes
-    ADD CONSTRAINT FK_ingredientes__restaurante FOREIGN KEY (restaurante) REFERENCES rrotonda.restaurantes(nombre);
-
-CREATE INDEX IN_ingredientes__restaurante ON rrotonda.ingredientes
-    (restaurante);
 
 ALTER TABLE rrotonda.alternativas_ingredientes
     ADD CONSTRAINT FK_alternativas_ingredientes__ingrediente FOREIGN KEY (ingrediente) REFERENCES rrotonda.ingredientes(id);

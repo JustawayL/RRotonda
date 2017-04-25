@@ -13,7 +13,6 @@ DELETE FROM rrotonda.productos;
 DELETE FROM rrotonda.categorias_productos;
 DELETE FROM rrotonda.alternativas_ingredientes;
 DELETE FROM rrotonda.ingredientes;
-DELETE FROM rrotonda.restaurantes;
 DELETE FROM rrotonda.clientes;
 DELETE FROM rrotonda.usuarios_roles;
 DELETE FROM rrotonda.usuarios;
@@ -23,9 +22,7 @@ DELETE FROM rrotonda.roles;
 INSERT INTO rrotonda.roles (rol)
 VALUES ('Cliente');
 INSERT INTO rrotonda.roles (rol)
-VALUES ('Funcionario Restaurante');
-INSERT INTO rrotonda.roles (rol)
-VALUES ('Funcionario Rotonda');
+VALUES ('Funcionario');
 
 -- usuarios
 INSERT INTO rrotonda.usuarios (nombre,clave)
@@ -39,19 +36,15 @@ VALUES ('Ruben','pulido');
 
 -- usuarios_Roles
 INSERT INTO rrotonda.usuarios_roles (usuario,rol)
-VALUES ('admin','Funcionario Restaurante');
-INSERT INTO rrotonda.usuarios_roles (usuario,rol)
-VALUES ('admin','Funcionario Rotonda');
+VALUES ('admin','Funcionario');
 INSERT INTO rrotonda.usuarios_roles (usuario,rol)
 VALUES ('Jeisson','Cliente');
 INSERT INTO rrotonda.usuarios_roles (usuario,rol)
-VALUES ('Jeisson','Funcionario Restaurante');
-INSERT INTO rrotonda.usuarios_roles (usuario,rol)
-VALUES ('Jeisson','Funcionario Rotonda');
+VALUES ('Jeisson','Funcionario');
 INSERT INTO rrotonda.usuarios_roles (usuario,rol)
 VALUES ('Leonardo','Cliente');
 INSERT INTO rrotonda.usuarios_roles (usuario,rol)
-VALUES ('Leonardo','Funcionario Restaurante');
+VALUES ('Leonardo','Funcionario');
 INSERT INTO rrotonda.usuarios_roles (usuario,rol)
 VALUES ('Ruben','Cliente');
 
@@ -63,35 +56,31 @@ VALUES ('Leonardo','Leonardo Andrés Alarcón Forero');
 INSERT INTO rrotonda.clientes (id,nombre)
 VALUES ('Ruben','Ruben Dario Pulido Castellanos');
 
--- restaurantes
-INSERT INTO rrotonda.restaurantes (nombre,direccion,telefono,descripcion)
-VALUES ('Tus Tacos','Carrera 7 No. 40 - 62, Bogotá', '3239300','La mejor comida tradicional mexicana');
-
 -- ingredientes
-INSERT INTO rrotonda.ingredientes (nombre,restaurante,existencias)
-VALUES ('Masa Taco','Tus Tacos',5);
-INSERT INTO rrotonda.ingredientes (nombre,restaurante,existencias)
-VALUES ('Masa Taco integral','Tus Tacos',5);
-INSERT INTO rrotonda.ingredientes (nombre,restaurante,existencias)
-VALUES ('Carne res 100gr','Tus Tacos',5);
-INSERT INTO rrotonda.ingredientes (nombre,restaurante,existencias)
-VALUES ('Carne pollo 100gr','Tus Tacos',5);
-INSERT INTO rrotonda.ingredientes (nombre,restaurante,existencias)
-VALUES ('Carne cerdo 100gr','Tus Tacos',5);
-INSERT INTO rrotonda.ingredientes (nombre,restaurante,existencias)
-VALUES ('Salchicha 100gr','Tus Tacos',5);
-INSERT INTO rrotonda.ingredientes (nombre,restaurante,existencias)
-VALUES ('Champiñon 30gr','Tus Tacos',5);
-INSERT INTO rrotonda.ingredientes (nombre,restaurante,existencias)
-VALUES ('Salsa Barbiquiu 15gr','Tus Tacos',5);
-INSERT INTO rrotonda.ingredientes (nombre,restaurante,existencias)
-VALUES ('Salsa de tomate 15gr','Tus Tacos',5);
-INSERT INTO rrotonda.ingredientes (nombre,restaurante,existencias)
-VALUES ('Salsa tartara 15gr','Tus Tacos',5);
-INSERT INTO rrotonda.ingredientes (nombre,restaurante,existencias)
-VALUES ('Papas 100gr','Tus Tacos',5);
-INSERT INTO rrotonda.ingredientes (nombre,restaurante,existencias)
-VALUES ('Papa criolla 100gr','Tus Tacos',5);
+INSERT INTO rrotonda.ingredientes (nombre,existencias)
+VALUES ('Masa Taco',5);
+INSERT INTO rrotonda.ingredientes (nombre,existencias)
+VALUES ('Masa Taco integral',5);
+INSERT INTO rrotonda.ingredientes (nombre,existencias)
+VALUES ('Carne res 100gr',5);
+INSERT INTO rrotonda.ingredientes (nombre,existencias)
+VALUES ('Carne pollo 100gr',5);
+INSERT INTO rrotonda.ingredientes (nombre,existencias)
+VALUES ('Carne cerdo 100gr',5);
+INSERT INTO rrotonda.ingredientes (nombre,existencias)
+VALUES ('Salchicha 100gr',5);
+INSERT INTO rrotonda.ingredientes (nombre,existencias)
+VALUES ('Champiñon 30gr',5);
+INSERT INTO rrotonda.ingredientes (nombre,existencias)
+VALUES ('Salsa Barbiquiu 15gr',5);
+INSERT INTO rrotonda.ingredientes (nombre,existencias)
+VALUES ('Salsa de tomate 15gr',5);
+INSERT INTO rrotonda.ingredientes (nombre,existencias)
+VALUES ('Salsa tartara 15gr',5);
+INSERT INTO rrotonda.ingredientes (nombre,existencias)
+VALUES ('Papas 100gr',5);
+INSERT INTO rrotonda.ingredientes (nombre,existencias)
+VALUES ('Papa criolla 100gr',5);
 
 -- alternativas_ingredientes
 INSERT INTO rrotonda.alternativas_ingredientes (ingrediente,alternativa)
@@ -129,29 +118,31 @@ VALUES (12,11);
 
 -- categorias_productos
 INSERT INTO rrotonda.categorias_productos (nombre)
+VALUES ('Entrada');
+INSERT INTO rrotonda.categorias_productos (nombre)
+VALUES ('Plato Fuerte');
+INSERT INTO rrotonda.categorias_productos (nombre)
 VALUES ('Postre');
 INSERT INTO rrotonda.categorias_productos (nombre)
 VALUES ('Bebida');
 INSERT INTO rrotonda.categorias_productos (nombre)
-VALUES ('Principal');
-INSERT INTO rrotonda.categorias_productos (nombre)
-VALUES ('Secundario');
+VALUES ('Acompañamiento');
 
 -- productos
-INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,restaurante,existencias)
-VALUES ('Taco Carne','Principal',4500,NULL,NULL,FALSE,'Tus Tacos',0);
-INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,restaurante,existencias)
-VALUES ('Taco Salchicha','Principal',4500,NULL,NULL,FALSE,'Tus Tacos',0);
-INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,restaurante,existencias)
-VALUES ('Taco Champiñon','Principal',3000,NULL,NULL,FALSE,'Tus Tacos',0);
-INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,restaurante,existencias)
-VALUES ('Coca-Cola 500ml','Bebida',1000,NULL,NULL,FALSE,'Tus Tacos',5);
-INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,restaurante,existencias)
-VALUES ('Postobon manzana 500ml','Bebida',1000,NULL,NULL,FALSE,'Tus Tacos',5);
-INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,restaurante,existencias)
-VALUES ('7up 500ml','Bebida',1000,NULL,NULL,FALSE,'Tus Tacos',5);
-INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,restaurante,existencias)
-VALUES ('Papas 100gr','Secundario',1000,NULL,NULL,FALSE,'Tus Tacos',0);
+INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,existencias)
+VALUES ('Taco Carne','Plato Fuerte',4500,NULL,NULL,FALSE,0);
+INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,existencias)
+VALUES ('Taco Salchicha','Plato Fuerte',4500,NULL,NULL,FALSE,0);
+INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,existencias)
+VALUES ('Taco Champiñon','Plato Fuerte',3000,NULL,NULL,FALSE,0);
+INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,existencias)
+VALUES ('Coca-Cola 500ml','Bebida',1000,NULL,NULL,FALSE,5);
+INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,existencias)
+VALUES ('Postobon manzana 500ml','Bebida',1000,NULL,NULL,FALSE,5);
+INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,existencias)
+VALUES ('7up 500ml','Bebida',1000,NULL,NULL,FALSE,5);
+INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,existencias)
+VALUES ('Papas 100gr','Acompañamiento',1000,NULL,NULL,FALSE,0);
 
 
 -- alternativas_productos
@@ -199,12 +190,12 @@ INSERT INTO rrotonda.productos_ingredientes (producto,ingrediente)
 VALUES (7,9);
 
 -- menus
-INSERT INTO rrotonda.menus (precio,nombre,personalizado,restaurante)
-VALUES (5000,'Combo tu taco',FALSE,'Tus Tacos');
-INSERT INTO rrotonda.menus (precio,nombre,personalizado,restaurante)
-VALUES (6000,'Combo Ranchero',FALSE,'Tus Tacos');
-INSERT INTO rrotonda.menus (precio,nombre,personalizado,restaurante)
-VALUES (4000,'Combo Champiñon',FALSE,'Tus Tacos');
+INSERT INTO rrotonda.menus (precio,nombre,personalizado)
+VALUES (5000,'Combo tu taco',FALSE);
+INSERT INTO rrotonda.menus (precio,nombre,personalizado)
+VALUES (6000,'Combo Ranchero',FALSE);
+INSERT INTO rrotonda.menus (precio,nombre,personalizado)
+VALUES (4000,'Combo Champiñon',FALSE);
 
 -- menus_productos
 INSERT INTO rrotonda.menus_productos (menu,producto)
