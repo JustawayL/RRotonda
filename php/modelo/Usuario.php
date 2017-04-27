@@ -35,6 +35,7 @@ class Usuario
     {
         $this->nombre=$nombre;
         $this->clave=$clave;
+        $this->roles=[];
     }
 
     /**
@@ -62,6 +63,6 @@ class Usuario
      */
     public function addRol($rol)
     {
-        $this->roles[]=rol;
+        $this->roles[]=$rol;
     }
 }

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <?php
 include 'initVar.php';
+include 'php/modelo/Usuario.php';
+$_SESSION["usuario"] = new Usuario("Jeisson","ramirez");
+$_SESSION["usuario"]->addRol('Cliente');
 ?>
 <html>
 	<head>
