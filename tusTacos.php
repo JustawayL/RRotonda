@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <?php
-	$_SESSION["titulo"] = "Tus Tacos";
-	$_SESSION["subtitulo"] = "Portal Funcionarios";
-	$_SESSION["version"] = "1.0";
-	$_SESSION["usuario"] = null;
+include 'initVar.php';
+include 'php/modelo/Usuario.php';
+$_SESSION["usuario"] = new Usuario("Jeisson","ramirez");
+$_SESSION["usuario"]->addRol('Cliente');
 ?>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Funcionarios, <?php echo $_SESSION["titulo"]?></title>
+		<title><?php echo $_SESSION["titulo"] ?></title>
 		<link rel="icon" href="imagenes/favicon.png" type="image/png" sizes="16x16">
 		<!-- Librerias -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,14 +20,14 @@
 		<header class="container-fluid">
 			<?php include 'plantillas/header.php' ?>
 		</header>
-		<!--<nav>
-			<?php include 'plantillas/nav.php' ?>
-		</nav>-->
 		<div  class="container">
 			<div class="row">
-				<section class="jpanel col-md-4 col-md-offset-4">
-					<?php include 'paneles/loginFuncionario.php' ?>
+				<section class="jpanel col-md-9">
+					<?php include 'paneles/menus.php' ?>
 				</section>
+				<aside class="jpanel col-md-3">
+					<?php include 'plantillas/aside.php' ?>
+				</aside>
 			</div>
 		</div>
 		<footer  class="container">
