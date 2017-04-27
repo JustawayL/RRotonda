@@ -1,1 +1,1 @@
-<meta http-equiv="refresh" content="0;URL=tusTacos.php">
+<meta http-equiv="refresh" content="0;URL=tusTacos/">

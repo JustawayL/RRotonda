@@ -1,8 +1,8 @@
 <h1>Lista de Menús</h1>
 <?php
-require_once 'php/modelo/Menu.php';
-require_once 'php/dao/DaoPdo.php';
-require_once 'php/dao/DaoMenu.php';
+require_once '../php/modelo/Menu.php';
+require_once '../php/dao/DaoPdo.php';
+require_once '../php/dao/DaoMenu.php';
 $alm = new Menu();
 $model = new DaoMenu('mysql:host=localhost;dbname=rotonda', 'root', '');
 ?>                    

@@ -1,7 +1,7 @@
 <?php
 if($_SESSION["usuario"]===null){
-	include 'paneles/autenticacion.php';
+	include '../paneles/autenticacion.php';
 }else{
-	include 'paneles/menuOpciones.php';
+	include '../paneles/menuOpciones.php';
 }
 ?>
