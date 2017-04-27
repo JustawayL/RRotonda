@@ -17,6 +17,11 @@ class Usuario
      */
     private $clave;
 
+    /**
+     * @var array Array con los roles que cuenta el usuario
+     */
+    private $roles;
+
 
 
 
@@ -33,27 +38,30 @@ class Usuario
     }
 
     /**
-     * Obtiene el nombre del usuario
+     * Get genérico de php para todos los atributos
+     * @param void $k Nombre del atributo
      */
-    public function getNombre()
+    public function __get($k)
     {
-        return $this->nombre;
+        return $this->$k;
     }
 
     /**
-     * Retorna la clave del usuario
+     * Set genérico para todos los atributos
+     * @param void $k Nombre del atributo
+     * @param void $v Valor que se le asigna al atributo
      */
-    public function getClave()
+    public function __set($k, $v)
     {
-        return $this->clave;
+        return $this->$k = $v;
     }
 
     /**
-     * Cambia la clave del usuario
-     * @param string $clave Nueva clave
+     * Agrega un rol nuevo al usuario
+     * @param string $rol Nuevo rol
      */
-    public function setClave($clave)
+    public function addRol($rol)
     {
-        $this->clave=$clave;
+        $this->roles[]=rol;
     }
 }
