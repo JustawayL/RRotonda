@@ -21,9 +21,9 @@ class DaoMenu extends DaoPdo
 
         	foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
         	{
-        		$menu = new Menu();
+        		$menu = new Menu($r->id);
 
-        		$menu->__SET('id', $r->id);
+        		
         		$menu->__SET('nombre', $r->nombre);
         		$menu->__SET('precio', $r->precio);
 
@@ -53,9 +53,8 @@ class DaoMenu extends DaoPdo
         	$stm->execute(array($id));
         	$r = $stm->fetch(PDO::FETCH_OBJ);
 
-        	$menu = new Menu();
+        	$menu = new Menu($r->id);
 
-        	$menu->__SET('id', $r->id);
         	$menu->__SET('nombre', $r->nombre);
         	$menu->__SET('precio', $r->precio);
         			

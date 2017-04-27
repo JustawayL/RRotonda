@@ -1,6 +1,7 @@
 <?php
 
-
+require_once 'php\dao\DaoCliente.php';
+require_once 'php\modelo\Cliente.php';
 /**
  * DAO para el pedido
  */
@@ -14,6 +15,7 @@ class DaoPedido extends DaoPdo
     {
         try
         {
+            $daoC=new DaoCliente($this->pdo);
         	$result = array();
 
         	$stm = $this->pdo->prepare("SELECT * FROM pedidos");
@@ -21,11 +23,10 @@ class DaoPedido extends DaoPdo
 
         	foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
         	{
-        		$ped = new Pedido();
+        		$ped = new Pedido($r->id);
 
-        		$ped->__SET('id', $r->id);
         		$ped->__SET('estado', $r->estado);
-        		$ped->__SET('cliente', $r->cliente);
+        		$ped->__SET('cliente', $daoC->getCliente($r->cliente));
         		$ped->__SET('fecha', $r->fecha);
 
         		$result[] = $ped;
@@ -47,6 +48,7 @@ class DaoPedido extends DaoPdo
     {
         try 
         {
+            $daoC=new DaoCliente($this->pdo);
         	$stm = $this->pdo
         	          ->prepare("SELECT * FROM pedidos WHERE id = ?");
         			          
@@ -54,11 +56,10 @@ class DaoPedido extends DaoPdo
         	$stm->execute(array($id));
         	$r = $stm->fetch(PDO::FETCH_OBJ);
 
-        	$ped = new Pedido();
+        	$ped = new Pedido($r->id);
 
-        	$ped->__SET('id', $r->id);
         	$ped->__SET('estado', $r->estado);
-        	$ped->__SET('cliente', $r->cliente);
+        	$ped->__SET('cliente', $daoC->getCliente($r->cliente));
         	$ped->__SET('fecha', $r->fecha);
 
         	return $ped;
@@ -104,8 +105,8 @@ class DaoPedido extends DaoPdo
         	     ->execute(
         		array(
         			$data->__GET('estado'), 
-        			$data->__GET('cliente'), 
-        			$data->__GET('fecha')
+        			$data->__GET('cliente')->id, 
+        			$data->__GET('fecha'),
         			$data->__GET('id')
         			)
         		);

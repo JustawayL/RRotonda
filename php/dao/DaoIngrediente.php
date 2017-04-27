@@ -21,9 +21,8 @@ class DaoIngrediente extends DaoPdo
 
         	foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
         	{
-        		$ingr = new Ingrediente();
+        		$ingr = new Ingrediente($r->id);
 
-        		$ingr->__SET('id', $r->id);
         		$ingr->__SET('nombre', $r->nombre);
         		$ingr->__SET('existencias', $r->existencias);
 
@@ -53,9 +52,8 @@ class DaoIngrediente extends DaoPdo
         	$stm->execute(array($id));
         	$r = $stm->fetch(PDO::FETCH_OBJ);
 
-        	$ingr = new Ingrediente();
+        	$ingr = new Ingrediente($r->id);
 
-        	$ingr->__SET('id', $r->id);
         	$ingr->__SET('nombre', $r->nombre);
         	$ingr->__SET('existencias', $r->existencias);
 
@@ -170,9 +168,8 @@ class DaoIngrediente extends DaoPdo
 
         	foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
         	{
-        		$ingr = new Ingrediente();
-
-        		$ingr->__SET('id', $r->id);
+        		$ingr = new Ingrediente($r->id);
+                
         		$ingr->__SET('nombre', $r->nombre);
         		$ingr->__SET('existencias', $r->existencias);
 

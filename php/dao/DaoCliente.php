@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * DAO para Cliente
  */
@@ -21,11 +20,9 @@ class DaoCliente extends DaoPdo
 
         	foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
         	{
-        		$cli = new Cliente();
+        		$cli = new Cliente($r->id);
 
-        		$cli->__SET('id', $r->id);
         		$cli->__SET('nombre', $r->nombre);
-        		$cli->__SET('clave', $r->clave);
         				
         		$result[] = $cli;
         	}
@@ -53,11 +50,9 @@ class DaoCliente extends DaoPdo
         	$stm->execute(array($id));
         	$r = $stm->fetch(PDO::FETCH_OBJ);
 
-        	$cli = new Cliente();
+        	$cli = new Cliente($r->id);
 
-        	$cli->__SET('id', $r->id);
         	$cli->__SET('nombre', $r->nombre);
-        	$cli->__SET('clave', $r->clave);
 
         	return $cli;
         } catch (Exception $e) 
@@ -93,15 +88,13 @@ class DaoCliente extends DaoPdo
         try 
         {
         	$sql = "UPDATE clientes SET 
-        				nombre          = ?, 
-        				clave 		    = ?
+        				nombre          = ?
         		    WHERE id = ?";
 
         	$this->pdo->prepare($sql)
         	     ->execute(
         		array(
-        			$data->__GET('nombre'), 
-        			$data->__GET('clave'), 
+        			$data->__GET('nombre'),
         			$data->__GET('id')
         			)
         		);
@@ -119,14 +112,14 @@ class DaoCliente extends DaoPdo
     {
         try 
         {
-        $sql = "INSERT INTO clientes (nombre,clave) 
+        $sql = "INSERT INTO clientes (id,nombre)
                 VALUES (?, ?)";
 
         $this->pdo->prepare($sql)
              ->execute(
         	array(
-        		$data->__GET('nombre'), 
-        		$data->__GET('clave')
+        		$data->__GET('id'), 
+        		$data->__GET('nombre')
         		)
         	);
         } catch (Exception $e) 
