@@ -190,6 +190,30 @@ class DaoIngrediente extends DaoPdo
     public function getIngredientesPorProducto($idProducto)
     {
         // TODO: implement here
+        try
+        {
+            $result = array();
+
+            $stm = $this->pdo->prepare("SELECT * FROM ingredientes b, productos_ingredientes c WHERE c.producto=? AND b.id=c.ingrediente");
+            $stm->execute(array($idProducto));
+
+            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
+            {
+                $ingr = new Ingrediente($r->id);
+                
+                $ingr->__SET('nombre', $r->nombre);
+                $ingr->__SET('existencias', $r->existencias);
+
+                $result[] = $ingr;
+            }
+
+            return $result;
+        }
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
+
     }
 
     /**
@@ -199,5 +223,15 @@ class DaoIngrediente extends DaoPdo
     public function eliminarAlternativa($idIngrediente, $idAlternativa)
     {
         // TODO: implement here
+         try 
+        {
+            $stm = $this->pdo
+                      ->prepare("DELETE FROM alternativas_ingredientes WHERE ingrediente = ? and alternativa= ?");                     
+
+            $stm->execute(array($idIngrediente,$idAlternativa));
+        } catch (Exception $e) 
+        {
+            die($e->getMessage());
+        }
     }
 }

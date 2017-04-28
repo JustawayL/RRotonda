@@ -21,9 +21,8 @@ class DaoProducto extends DaoPdo
 
         	foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
         	{
-        		$prod = new Producto();
+        		$prod = new Producto($r->id);
 
-        		$prod->__SET('id', $r->id);
         		$prod->__SET('nombre', $r->nombre);
         		$prod->__SET('categoria', $r->categoria);
         		$prod->__SET('precio', $r->precio);
@@ -56,9 +55,8 @@ class DaoProducto extends DaoPdo
         	$stm->execute(array($id));
         	$r = $stm->fetch(PDO::FETCH_OBJ);
 
-        	$prod = new Producto();
+        	$prod = new Producto($r->id);
 
-        	$prod->__SET('id', $r->id);
         	$prod->__SET('nombre', $r->nombre);
         	$prod->__SET('categoria', $r->categoria);
         	$prod->__SET('precio', $r->precio);
@@ -188,9 +186,8 @@ class DaoProducto extends DaoPdo
 
         	foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
         	{
-        		$prod = new Producto();
+        		$prod = new Producto($r->id);
 
-        		$prod->__SET('id', $r->id);
         		$prod->__SET('nombre', $r->nombre);
         		$prod->__SET('categoria', $r->categoria);
         		$prod->__SET('precio', $r->precio);
@@ -213,6 +210,32 @@ class DaoProducto extends DaoPdo
     public function getProductosPorCategoria($categoria)
     {
         // TODO: implement here
+        try
+        {
+            $result = array();
+
+            $stm = $this->pdo->prepare("SELECT * FROM productos WHERE categoria=?");
+            $stm->execute(array($categoria));
+
+            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
+            {
+                $prod = new Producto($r->id);
+
+                $prod->__SET('nombre', $r->nombre);
+                $prod->__SET('categoria', $r->categoria);
+                $prod->__SET('precio', $r->precio);
+                $prod->__SET('foto', $r->foto);
+                $prod->__SET('descripcion', $r->descripcion);
+                $prod->__SET('existencias', $r->existencias);
+                $result[] = $prod;
+            }
+
+            return $result;
+        }
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
     }
 
     /**
@@ -221,6 +244,32 @@ class DaoProducto extends DaoPdo
     public function getProductosPorMenu($idMenu)
     {
         // TODO: implement here
+        try
+        {
+            $result = array();
+
+            $stm = $this->pdo->prepare("SELECT * FROM productos b, menus_productos c WHERE c.menu=? AND b.id=c.producto");
+            $stm->execute(array($idMenu));
+
+            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
+            {
+                $prod = new Producto($r->id);
+
+                $prod->__SET('nombre', $r->nombre);
+                $prod->__SET('categoria', $r->categoria);
+                $prod->__SET('precio', $r->precio);
+                $prod->__SET('foto', $r->foto);
+                $prod->__SET('descripcion', $r->descripcion);
+                $prod->__SET('existencias', $r->existencias);
+                $result[] = $prod;
+            }
+
+            return $result;
+        }
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
     }
 
     /**
@@ -229,6 +278,7 @@ class DaoProducto extends DaoPdo
     public function getProductosPorPedido($idPedido)
     {
         // TODO: implement here
+       
     }
 
     /**

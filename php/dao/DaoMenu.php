@@ -140,6 +140,31 @@ class DaoMenu extends DaoPdo
     public function getMenusPorPedido($idPedido)
     {
         // TODO: implement here
+
+        try
+        {
+            $result = array();
+
+            $stm = $this->pdo->prepare("SELECT * FROM menus m, pedidos_menus p WHERE p.pedido=? AND m.id=p.menu");
+            $stm->execute(array($idPedido));
+
+            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
+            {
+                $menu = new Menu($r->id);
+
+                
+                $menu->__SET('nombre', $r->nombre);
+                $menu->__SET('precio', $r->precio);
+
+                $result[] = $menu;
+            }
+
+            return $result;
+        }
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
     }
 
 }
