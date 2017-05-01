@@ -1,6 +1,6 @@
 <?php
 
-
+require_once '/../modelo/Ingrediente.php';
 /**
  * DAO para el ingrediente
  */
@@ -25,6 +25,7 @@ class DaoIngrediente extends DaoPdo
 
         		$ingr->__SET('nombre', $r->nombre);
         		$ingr->__SET('existencias', $r->existencias);
+                $ingr->__SET('alternativas', $this->getAlternativas($r->id));
 
         		$result[] = $ingr;
         	}
@@ -56,6 +57,7 @@ class DaoIngrediente extends DaoPdo
 
         	$ingr->__SET('nombre', $r->nombre);
         	$ingr->__SET('existencias', $r->existencias);
+            $ingr->__SET('alternativas', $this->getAlternativas($r->id));
 
         	return $ingr;
         } catch (Exception $e) 
@@ -169,9 +171,6 @@ class DaoIngrediente extends DaoPdo
         	foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
         	{
         		$ingr = new Ingrediente($r->id);
-                
-        		$ingr->__SET('nombre', $r->nombre);
-        		$ingr->__SET('existencias', $r->existencias);
 
         		$result[] = $ingr;
         	}
@@ -187,6 +186,7 @@ class DaoIngrediente extends DaoPdo
     /**
      * @param int $idProducto
      */
+/*
     public function getIngredientesPorProducto($idProducto)
     {
         // TODO: implement here
@@ -215,6 +215,7 @@ class DaoIngrediente extends DaoPdo
         }
 
     }
+*/
 
     /**
      * @param int $idIngrediente

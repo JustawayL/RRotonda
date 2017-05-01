@@ -1,5 +1,7 @@
 <?php
-
+require_once '/../modelo/Menu.php';
+require_once '/../modelo/Pedido.php';
+require_once '/../modelo/Producto.php';
 /**
  * DAO para el pedido
  */
@@ -25,6 +27,8 @@ class DaoPedido extends DaoPdo
         		$ped->__SET('estado', $r->estado);
         		$ped->__SET('cliente',$r->cliente);
         		$ped->__SET('fecha', $r->fecha);
+                $ped->__SET('menus', $this->getMenusPorPedido($r->id));
+                $ped->__SET('productos', $this->getProductosPorPedido($r->id));
 
         		$result[] = $ped;
         	}
@@ -57,6 +61,10 @@ class DaoPedido extends DaoPdo
         	$ped->__SET('estado', $r->estado);
         	$ped->__SET('cliente', $r->cliente);
         	$ped->__SET('fecha', $r->fecha);
+            $ped->__SET('menus', $this->getMenusPorPedido($r->id));
+            $ped->__SET('productos', $this->getProductosPorPedido($r->id));
+
+
 
         	return $ped;
         } catch (Exception $e) 
@@ -198,5 +206,72 @@ class DaoPedido extends DaoPdo
         {
             die($e->getMessage());
         }
+    }
+      /**
+     * @param int $idPedido
+     */
+    public function getMenusPorPedido($idPedido)
+    {
+        // TODO: implement here
+
+        try
+        {
+            $result = array();
+
+            $stm = $this->pdo->prepare("SELECT * FROM menus m, pedidos_menus p WHERE p.pedido=? AND m.id=p.menu");
+            $stm->execute(array($idPedido));
+
+            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
+            {
+                $menu = new Menu($r->id);
+
+                
+                $menu->__SET('nombre', $r->nombre);
+                $menu->__SET('precio', $r->precio);
+
+                $result[] = $menu;
+            }
+
+            return $result;
+        }
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
+     /**
+     * @param int $idPedido
+     */
+    public function getProductosPorPedido($idPedido)
+    {
+        // TODO: implement here
+        
+        try
+        {
+            $result = array();
+
+            $stm = $this->pdo->prepare("SELECT * FROM productos p, pedidos_productos pp WHERE pp.pedido=? AND pp.producto=p.id");
+            $stm->execute(array($idPedido));
+
+            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
+            {
+                $prod = new Producto($r->id);
+
+                $prod->__SET('nombre', $r->nombre);
+                $prod->__SET('categoria', $r->categoria);
+                $prod->__SET('precio', $r->precio);
+                $prod->__SET('foto', $r->foto);
+                $prod->__SET('descripcion', $r->descripcion);
+                $prod->__SET('existencias', $r->existencias);
+                $result[] = $prod;
+            }
+
+            return $result;
+        }
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
+       
     }
 }

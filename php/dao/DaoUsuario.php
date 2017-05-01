@@ -1,5 +1,5 @@
 <?php
-
+require_once '/../modelo/Usuario.php';
 
 /**
  * DAO para el Usuario

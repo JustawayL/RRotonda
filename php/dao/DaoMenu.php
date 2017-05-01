@@ -1,6 +1,7 @@
 <?php
 
-
+require_once '/../modelo/Menu.php';
+require_once '/../modelo/Producto.php';
 /**
  * Clase DAO para el Menu
  */
@@ -26,6 +27,7 @@ class DaoMenu extends DaoPdo
         		
         		$menu->__SET('nombre', $r->nombre);
         		$menu->__SET('precio', $r->precio);
+                $menu->__SET('productos', $this->getProductosPorMenu($r->id));
 
         		$result[] = $menu;
         	}
@@ -57,6 +59,7 @@ class DaoMenu extends DaoPdo
 
         	$menu->__SET('nombre', $r->nombre);
         	$menu->__SET('precio', $r->precio);
+            $menu->__SET('productos', $this->getProductosPorMenu($r->id));
         			
 
         	return $menu;
@@ -137,6 +140,7 @@ class DaoMenu extends DaoPdo
     /**
      * @param int $idPedido
      */
+/*
     public function getMenusPorPedido($idPedido)
     {
         // TODO: implement here
@@ -157,6 +161,31 @@ class DaoMenu extends DaoPdo
                 $menu->__SET('precio', $r->precio);
 
                 $result[] = $menu;
+            }
+
+            return $result;
+        }
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
+*/
+    public function getProductosPorMenu($idMenu)
+    {
+        // TODO: implement here
+        try
+        {
+            $result = array();
+
+            $stm = $this->pdo->prepare("SELECT * FROM productos b, menus_productos c WHERE c.menu=? AND b.id=c.producto");
+            $stm->execute(array($idMenu));
+
+            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
+            {
+                $prod = new Producto($r->id);
+
+                $result[] = $prod;
             }
 
             return $result;
