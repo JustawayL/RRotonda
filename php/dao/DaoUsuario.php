@@ -48,6 +48,7 @@ class DaoUsuario extends DaoPdo
             foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
             {
                 $usu = new Usuario($r->nombre,$r->clave);
+                $usu->roles=$this->consultarRoles($r->nombre);
                         
                 $result[] = $usu;
             }
@@ -90,6 +91,28 @@ class DaoUsuario extends DaoPdo
     public function getUsuariosPorRol($rol)
     {
         // TODO: implement here
+        
+        try
+        {
+            $result = array();
+
+            $stm = $this->pdo->prepare("SELECT * FROM usuarios u, usuarios_roles ur WHERE ur.rol=? AND u.nombre=ur.usuario");
+            $stm->execute(array($rol));
+
+            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
+            {
+                $usu = new Usuario($r->nombre,$r->clave);
+                        
+                $result[] = $usu;
+            }
+
+            return $result;
+        }
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
+
     }
 
     /**
@@ -131,6 +154,30 @@ class DaoUsuario extends DaoPdo
 
             $stm->execute(array($nombre));
         } catch (Exception $e) 
+        {
+            die($e->getMessage());
+        }
+    }
+
+    public function consultarRoles($usuario)
+    {
+        # code...
+          try
+        {
+            $result = array();
+
+            $stm = $this->pdo->prepare("SELECT * FROM usuarios_roles ur WHERE ur.usuario=?");
+            $stm->execute(array($usuario));
+
+            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
+            {
+                        
+                $result[] = $r->rol;
+            }
+
+            return $result;
+        }
+        catch(Exception $e)
         {
             die($e->getMessage());
         }
