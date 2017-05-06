@@ -1,6 +1,5 @@
 <?php
 require_once '/../modelo/Producto.php';
-require_once '/../modelo/Ingrediente.php';
 
 /**
  * DAO para el producto
@@ -30,8 +29,6 @@ class DaoProducto extends DaoPdo
         		$prod->__SET('foto', $r->foto);
         		$prod->__SET('descripcion', $r->descripcion);
         		$prod->__SET('existencias', $r->existencias);
-                $prod->__SET('alternativas', $this->getAlternativas($r->id));
-                $prod->__SET('ingredientes', $this->getIngredientesPorProducto($r->id));
         		$result[] = $prod;
         	}
 
@@ -66,8 +63,7 @@ class DaoProducto extends DaoPdo
         	$prod->__SET('foto', $r->foto);
         	$prod->__SET('descripcion', $r->descripcion);
         	$prod->__SET('existencias', $r->existencias);
-            $prod->__SET('alternativas', $this->getAlternativas($r->id));
-            $prod->__SET('ingredientes', $this->getIngredientesPorProducto($r->id));
+
         	return $prod;
         } catch (Exception $e) 
         {
@@ -246,7 +242,7 @@ class DaoProducto extends DaoPdo
     /**
      * @param int $idMenu
      */
-/*
+
     public function getProductosPorMenu($idMenu)
     {
         // TODO: implement here
@@ -277,11 +273,11 @@ class DaoProducto extends DaoPdo
             die($e->getMessage());
         }
     }
-*/
+
     /**
      * @param int $idPedido
      */
-/*
+
     public function getProductosPorPedido($idPedido)
     {
         // TODO: implement here
@@ -314,39 +310,7 @@ class DaoProducto extends DaoPdo
         }
        
     }
-*/
-   /**
-     * @param int $idProducto
-     */
-    public function getIngredientesPorProducto($idProducto)
-    {
-        // TODO: implement here
-        try
-        {
-            $result = array();
-
-            $stm = $this->pdo->prepare("SELECT * FROM ingredientes b, productos_ingredientes c WHERE c.producto=? AND b.id=c.ingrediente");
-            $stm->execute(array($idProducto));
-
-            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
-            {
-                $ingr = new Ingrediente($r->id);
-                
-                $ingr->__SET('nombre', $r->nombre);
-                $ingr->__SET('existencias', $r->existencias);
-
-                $result[] = $ingr;
-            }
-
-            return $result;
-        }
-        catch(Exception $e)
-        {
-            die($e->getMessage());
-        }
-
-    }
-
+ 
     /**
      * @param int $idProducto
      * @param int $idAlternativa

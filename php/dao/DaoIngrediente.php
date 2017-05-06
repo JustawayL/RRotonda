@@ -25,7 +25,6 @@ class DaoIngrediente extends DaoPdo
 
         		$ingr->__SET('nombre', $r->nombre);
         		$ingr->__SET('existencias', $r->existencias);
-                $ingr->__SET('alternativas', $this->getAlternativas($r->id));
 
         		$result[] = $ingr;
         	}
@@ -57,7 +56,6 @@ class DaoIngrediente extends DaoPdo
 
         	$ingr->__SET('nombre', $r->nombre);
         	$ingr->__SET('existencias', $r->existencias);
-            $ingr->__SET('alternativas', $this->getAlternativas($r->id));
 
         	return $ingr;
         } catch (Exception $e) 
@@ -154,7 +152,6 @@ class DaoIngrediente extends DaoPdo
         	die($e->getMessage());
         }
     }
-
     /**
      * Retorna una lista de ingredientes que son alternativas de un ingrediente
      * @param int $id
@@ -186,7 +183,7 @@ class DaoIngrediente extends DaoPdo
     /**
      * @param int $idProducto
      */
-/*
+
     public function getIngredientesPorProducto($idProducto)
     {
         // TODO: implement here
@@ -215,7 +212,6 @@ class DaoIngrediente extends DaoPdo
         }
 
     }
-*/
 
     /**
      * @param int $idIngrediente

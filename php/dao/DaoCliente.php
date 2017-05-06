@@ -1,7 +1,7 @@
 <?php
 
 require_once '/../modelo/Cliente.php';
-require_once '/../modelo/Pedido.php';
+
 /**
  * DAO para Cliente
  */
@@ -27,8 +27,6 @@ class DaoCliente extends DaoPdo
         		$cli = new Cliente($r->id);
 
         		$cli->__SET('nombre', $r->nombre);
-
-                $cli->__SET('pedidos', $this->getPedidosPorCliente($r->id));
         				
         		$result[] = $cli;
         	}
@@ -59,7 +57,6 @@ class DaoCliente extends DaoPdo
         	$cli = new Cliente($r->id);
 
         	$cli->__SET('nombre', $r->nombre);
-            $cli->__SET('pedidos', $this->getPedidosPorCliente($r->id));
 
         	return $cli;
         } catch (Exception $e) 
@@ -135,29 +132,4 @@ class DaoCliente extends DaoPdo
         }
     }
 
-    public function getPedidosPorCliente($id)
-    {
-        # code...
-        try
-        {
-            $result = array();
-
-            $stm = $this->pdo->prepare("SELECT * FROM pedidos p where p.cliente=?");
-            $stm->execute(array($id));
-
-            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
-            {
-                $pedido = new Pedido($r->id);
-
-                        
-                $result[] = $pedido;
-            }
-
-            return $result;
-        }
-        catch(Exception $e)
-        {
-            die($e->getMessage());
-        }
-    }
 }
