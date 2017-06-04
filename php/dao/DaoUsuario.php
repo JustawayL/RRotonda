@@ -66,21 +66,17 @@ class DaoUsuario extends DaoPdo
      */
     public function getUsuario($nombre)
     {
-        // TODO: implement here
-        try 
+        try
         {
             $stm = $this->pdo
-                      ->prepare("SELECT * FROM usuarios WHERE nombre = ?");
-                              
-
+            ->prepare("SELECT * FROM usuarios WHERE nombre = ?");
             $stm->execute(array($nombre));
             $r = $stm->fetch(PDO::FETCH_OBJ);
-
-            $usu = new Usuario($r->nombre,$r->clave);
-
+            $usu = null;
+            if($r!=null)
+                $usu = new Usuario($r->nombre,$r->clave);
             return $usu;
-        } catch (Exception $e) 
-        {
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }

@@ -4,6 +4,7 @@ if(!isset($_SESSION["init"])){
 	$_SESSION["titulo"] = "Tus Tacos";
 	$_SESSION["subtitulo"] = "La mejor comida tradicional Mexicana";
 	$_SESSION["version"] = "1.0";
+	$_SESSION["hostDB"] = "localhost";
 	$_SESSION["usuario"] = null;
 }
 ?>

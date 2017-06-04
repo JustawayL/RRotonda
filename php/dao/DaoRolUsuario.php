@@ -32,24 +32,34 @@ class DaoRolUsuario extends DaoPdo
      */
     public function getRoles()
     {
-        // TODO: implement here
          try
         {
             $result = array();
-
             $stm = $this->pdo->prepare("SELECT * FROM roles");
             $stm->execute();
-
-            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
-            {
-                        
+            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
                 $result[] = $r->rol;
             }
-
             return $result;
         }
-        catch(Exception $e)
+        catch(Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getRolesPorUsuario($nombreUsuario)
+    {
+         try
         {
+            $result = array();
+            $stm = $this->pdo->prepare("SELECT * FROM usuarios_roles WHERE usuario = ?");
+            $stm->execute(array($nombreUsuario));
+            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
+                $result[] = $r->rol;
+            }
+            return $result;
+        }
+        catch(Exception $e) {
             die($e->getMessage());
         }
     }

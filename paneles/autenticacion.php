@@ -1,5 +1,5 @@
 <h1>Iniciar Sesión</h1>
-<form id="autenticacion" action="" method="POST">
+<form id="autenticacion" action="../controlador/autenticar.php" method="POST">
     <input id="nombre" class="form-control" type="text" name="nombre" placeholder="Nombre de Usuario" required/><br>
     <input id="clave" class="form-control" type="password" name="clave" placeholder="Contraseña" required/><br>
     <input type="submit" value="Ingresar" name="ingresar" class="btn btn-primary"/>
