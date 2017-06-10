@@ -130,19 +130,19 @@ VALUES ('Acompañamiento');
 
 -- productos
 INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,existencias)
-VALUES ('Taco Carne','Plato Fuerte',4500,NULL,NULL,FALSE,0);
+VALUES ('Taco Carne','Plato Fuerte',4500,'productosImg/1.jpg',NULL,FALSE,0);
 INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,existencias)
-VALUES ('Taco Salchicha','Plato Fuerte',4500,NULL,NULL,FALSE,0);
+VALUES ('Taco Salchicha','Plato Fuerte',4500,'productosImg/2.jpg',NULL,FALSE,0);
 INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,existencias)
-VALUES ('Taco Champiñon','Plato Fuerte',3000,NULL,NULL,FALSE,0);
+VALUES ('Taco Champiñon','Plato Fuerte',3000,'productosImg/3.jpg',NULL,FALSE,0);
 INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,existencias)
-VALUES ('Coca-Cola 500ml','Bebida',1000,NULL,NULL,FALSE,5);
+VALUES ('Coca-Cola 500ml','Bebida',1000,'productosImg/4.jpg',NULL,FALSE,5);
 INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,existencias)
-VALUES ('Postobon manzana 500ml','Bebida',1000,NULL,NULL,FALSE,5);
+VALUES ('Postobon manzana 500ml','Bebida',1000,'productosImg/5.jpg',NULL,FALSE,5);
 INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,existencias)
-VALUES ('7up 500ml','Bebida',1000,NULL,NULL,FALSE,5);
+VALUES ('7up 500ml','Bebida',1000,'productosImg/6.jpg',NULL,FALSE,5);
 INSERT INTO rrotonda.productos (nombre,categoria,precio,foto,descripcion,personalizado,existencias)
-VALUES ('Papas 100gr','Acompañamiento',1000,NULL,NULL,FALSE,0);
+VALUES ('Papas 100gr','Acompañamiento',1000,'productosImg/7.jpg',NULL,FALSE,0);
 
 
 -- alternativas_productos
@@ -230,9 +230,9 @@ INSERT INTO rrotonda.pedidos (estado,cliente,fecha)
 VALUES ('Pedido','Jeisson','2017-04-13 19:25:03');
 
 -- pedidos_productos
-INSERT INTO rrotonda.pedidos_productos (pedido,producto)
-VALUES (2,7);
+INSERT INTO rrotonda.pedidos_productos (pedido,producto,cantidad)
+VALUES (2,7,3);
 
 -- pedidos_menus
-INSERT INTO rrotonda.pedidos_menus (pedido,menu)
-VALUES (1,1);
+INSERT INTO rrotonda.pedidos_menus (pedido,menu,cantidad)
+VALUES (1,1,2);

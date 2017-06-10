@@ -33,6 +33,7 @@ CREATE TABLE rrotonda.menus (
 CREATE TABLE rrotonda.pedidos_menus (
     pedido integer NOT NULL,
     menu integer NOT NULL,
+    cantidad integer NOT NULL,
     PRIMARY KEY (pedido, menu)
 );
 
@@ -75,6 +76,7 @@ CREATE TABLE rrotonda.alternativas_ingredientes (
 CREATE TABLE rrotonda.pedidos_productos (
     pedido integer NOT NULL,
     producto integer NOT NULL,
+    cantidad integer NOT NULL,
     PRIMARY KEY (pedido, producto)
 );
 

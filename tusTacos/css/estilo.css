@@ -24,22 +24,49 @@ header .subtitulo{
 body{
     background-image: url("../imagenes/fondo.jpg");
 }
+h1{
+    text-shadow: 0px 0px 7px rgba(100, 100, 100, 0.75);
+    font-size: 45px;
+}
 table tbody tr td{
     text-align: left;
 }
 .centrado{
     text-align: center;
 }
-.jpanel{
-    border: 3px solid #7f5000;
-    background-color: rgba(240, 173, 78, 0.5);
-    border-radius: 10px;
-    padding: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+.izquierdo{
+    text-align: left;
 }
-.imgFlotante{
-    float:left;
+.jpanel{
+    border: 2px solid #000;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    background-color: rgba(240, 173, 78, 0.5);
+    padding-bottom: 5px;
+}
+.jpanel2{
+    border: 2px solid #7f5000;
+    padding-bottom: 3px;
+    background-color: rgba(240, 173, 78, 0.5);
+}
+.jpanel3{
+    border-radius: 8px;
+    background-color: rgba(240, 173, 78, 0.5);
+}
+.enLinea{
+    display: inline-block;
+}
+.cant{
+    width: 70px;
+    display: inline-block;
+}
+.msjAutenticacion{
+    color: red;
+}
+.jtable{
+    border: 2px solid #7f5000;
+    border-radius: 8px;
+    background: white;
 }
 footer{
     margin-top: 5px;

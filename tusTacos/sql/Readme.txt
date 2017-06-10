@@ -4,7 +4,7 @@ IMPORTACIÓN:
 0 Si se tenía la BD con anterioridad
 1 para crear la BD, tablas y restricciones
 2 Para llenar automáticamente con datos predefinidos
-
+4 Se debe tener un usuario con nombre 'tusTacosSw' y contraseña 'tacos'
 
 
 

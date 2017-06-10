@@ -1,8 +1,13 @@
 <h1>Iniciar Sesión</h1>
-<form id="autenticacion" action="../controlador/autenticar.php" method="POST">
-    <input id="nombre" class="form-control" type="text" name="nombre" placeholder="Nombre de Usuario" required/><br>
-    <input id="clave" class="form-control" type="password" name="clave" placeholder="Contraseña" required/><br>
-    <input type="submit" value="Ingresar" name="ingresar" class="btn btn-primary"/>
+<?php if(isset($_SESSION["msjAutenticacion"])){ ?>
+<span class="msjAutenticacion"><?php echo $_SESSION["msjAutenticacion"]; ?></span>
+<?php $_SESSION["msjAutenticacion"]=null;} ?>
+<form id="autenticacion" action="controlador/autenticar.php" method="POST">
+	<div class="form-group">
+		<input id="nombre" class="form-control" type="text" name="nombre" placeholder="Nombre de Usuario" required/><br>
+		<input id="clave" class="form-control" type="password" name="clave" placeholder="Contraseña" required/>
+	</div>
+	<input type="submit" value="Ingresar" name="ingresar" class="btn btn-primary"/>
 </form>
 <br>
 <a href="">Registrarse</a><br>
