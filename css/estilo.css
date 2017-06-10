@@ -1,0 +1,24 @@
+/*
+Copyright (c)  2017 Jeisson Piñeros
+Universidad Distrital Francisco José de Caldas
+Todos los derechos reservados
+*/
+html,body,.container,.jcol{
+    height: 100%;
+}
+.row{
+    height: 50%;
+}
+body{
+    background-image: url("../imagenes/fondo.jpg");
+}
+.centrado{
+    text-align: center;
+}
+.relleno{
+    height: 20%;
+}
+.jbutton{
+    height: 100%;
+    font-size: 22px;
+}
